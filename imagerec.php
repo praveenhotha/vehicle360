@@ -57,9 +57,9 @@ if ($uploadOk == 0) {
     require 'vendor/autoload.php';
 
     use Aws\Rekognition\RekognitionClient;
-
+// your key goes here
     $options = array('region' => 'us-west-2',  'version' => '2016-06-27','credentials' => [
-        'key'    => 'key',
+        'key'    => 'key', 
         'secret' => 'secret'
     ] );
 
