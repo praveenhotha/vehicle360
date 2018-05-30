@@ -6,9 +6,12 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   </head>
   <body>
     <div id="root"></div>
+	<div id="timer"></div>
     <script type="text/babel">
         const Card = (props) => {
                 return (
@@ -22,11 +25,63 @@
                 );
         };
 
-      ReactDOM.render(
-        <Card />,
-        document.getElementById('root')
-      );
+     // ReactDOM.render(    <Card />,        document.getElementById('root')      );
 
     </script>
+  
+<script type="text/babel">
+$(document).ready(function(){
+        var count = 1;
+        //var socket = io.connect('/');
+        //var socket = io('http://tonynme.in:8081', {path: '/push'});
+       var socket = io.connect('ws://tonynme.in:3000');
+        socket.on('realtime', function( obj, msg){
+            
+// Add the values coming from OBD devicee to the page
+		const health = <div><div class="row">
+                <div class="col-md-6">
+        <b>RPM</b> : {obj.RPM}
+                </div>
+                <div class="col-md-6">
+                                <b>Mileage</b> : {obj.MPGLongTerm}
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-6">
+                <b>Throttle Position</b> :  {obj.ThrottlePosition}
+                </div>
+                <div class="col-md-6">
+                <b>Speed</b> : {obj.OBDSpeed} 
+                </div>
+        </div>
+
+                <br/><b>Short Term Fuel Trim</b> : {obj.STFT}
+        <br/>   <b>Long Term Fuel Trim</b> : {obj.LTFT}
+	</div>;
+		ReactDOM.render(health, document.getElementById('healthTab'));
+                //$('#messages').append('<li><b style="color:' + color + '">STFT : '+obj.STFT+'  </b>: </li>');
+                //$('#tweetCnt').text(count);
+                count++;
+    });
+        socket.on('status', function( obj){
+                var color = 'green';
+                //$('#messages').append('<li><b style="color:' + color + '">Health : '+obj+'  </b>: </li>');
+                //$('#tweetCnt').text(count);
+                count++;
+    });
+});
+function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  ReactDOM.render(element, document.getElementById('timer'));
+}
+
+//setInterval(tick, 1000);
+</script>
+
   </body>
 </html>

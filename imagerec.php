@@ -59,8 +59,8 @@ if ($uploadOk == 0) {
     use Aws\Rekognition\RekognitionClient;
 
     $options = array('region' => 'us-west-2',  'version' => '2016-06-27','credentials' => [
-        'key'    => 'AKIAIBKTAHLYLA6HKTVA',
-        'secret' => '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'
+        'key'    => 'key',
+        'secret' => 'secret'
     ] );
 
     $rekognition = new RekognitionClient($options);
@@ -247,10 +247,10 @@ print("</pre>");
     </div>
  <div class="panel panel-primary">
       <div class="panel-heading font-weight-bold">Vehicle Health</div>
-      <div class="panel-body">
+      <div class="panel-body" id="healthTab">
         <div class="row">
                 <div class="col-md-6">
-        <b>RPM</b> : 
+        <b>RPM</b> : <span id="spnRPM"></span> 
                 </div>
                 <div class="col-md-6">
                                 <b>Mileage</b> : 
@@ -258,10 +258,10 @@ print("</pre>");
         </div>
         <div class="row">
                 <div class="col-md-6">
-                <b>Throttle Position</b> : 
+                <b>Throttle Position</b> :  <span id="spnThrottle"></span>
                 </div>
                 <div class="col-md-6">
-                <b>Speed</b> : 
+                <b>Speed</b> :  
                 </div>
         </div>
 

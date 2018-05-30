@@ -59,8 +59,8 @@ if ($uploadOk == 0) {
     use Aws\Rekognition\RekognitionClient;
 
     $options = array('region' => 'us-west-2',  'version' => '2016-06-27','credentials' => [
-        'key'    => 'AKIAIBKTAHLYLA6HKTVA',
-        'secret' => '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'
+        'key'    => 'key',
+        'secret' => 'secret'
     ] );
 
     $rekognition = new RekognitionClient($options);
